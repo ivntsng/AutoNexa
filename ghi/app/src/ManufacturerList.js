@@ -1,7 +1,9 @@
-import React from 'react';
+import React from "react";
 
-export default function ManufacturerList({manufacturer}){
-    return(
-        <p>A manufacturer list form</p>
-    )
+class ManufactuerList extends React.Component {
+  render() {
+    return <p>This is a manufacturer list</p>;
+  }
 }
+
+export default ManufactuerList;
