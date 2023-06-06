@@ -13,6 +13,7 @@ function App() {
   const [manufacturer, setManufacturer] = useState([]);
   const [model, setModel] = useState([]);
   const [automobile, setAutomobile] = useState([]);
+  const [automobile, setAutomobile] = useState([]);
 
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
@@ -99,3 +100,4 @@ function App() {
 }
 
 export default App;
+//
