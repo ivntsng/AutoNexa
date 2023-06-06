@@ -5,6 +5,10 @@ import ManufacturerList from "./ManufacturerList";
 import CreateManufacturer from "./CreateManufacturer";
 import ListVehicleModel from "./ListVehicleModel";
 import { useState, useEffect } from "react";
+import CreateVehicleModel from "./CreateVehicleModel";
+import ListAutomobiles from "./ListAutomobiles";
+import CreateAutomobile from "./CreateAutomobile";
+
 
 function App() {
   return (
@@ -16,6 +20,9 @@ function App() {
           <Route path="manufacturerList" element={<ManufacturerList />} />
           <Route path="createmanufactuer" element={<CreateManufacturer />} />
           <Route path="listvehiclemodel" element={<ListVehicleModel />} />
+          <Route path="createvehiclemodel" element={<CreateVehicleModel />} />
+          <Route path="listautomobiles" element={<ListAutomobiles />} />
+          <Route path="createautomobile" element={<CreateAutomobile />} />
         </Routes>
       </div>
     </BrowserRouter>
