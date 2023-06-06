@@ -1,9 +1,5 @@
-import React from 'react';
+// import React, { useState, useEffect } from 'react';
 
-function ListAutomobiles(){
-    return(
-        <p>List of automobiles</p>
-    )
-}
+// function AutomobileList({automobilesList, getAutomobiles}){
 
-export default ListAutomobiles;
+// }
