@@ -22,17 +22,17 @@ function Nav() {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink className="nav-link" to="/manufacturers">
-                Manufacturers list
+                Manufacturers
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/manufacturers/new">
-                Create Manufacturer
+                Create a Manufacturer
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/models">
-                List of vehicles
+                Models
               </NavLink>
             </li>
             <li className="nav-item">
