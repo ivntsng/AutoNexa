@@ -88,6 +88,8 @@ function CreateVehicleModel(){
             <button className="btn btn-primary">Create</button>
         </form>
     )
+function CreateVehicleModel() {
+  return <p>Creating a new vehicle model</p>;
 }
 
 export default CreateVehicleModel;
