@@ -14,6 +14,7 @@ function App() {
   const [model, setModel] = useState([]);
   const [automobile, setAutomobile] = useState([]);
 
+
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
     const response = await fetch(manufacturerUrl);
