@@ -9,7 +9,6 @@ import CreateVehicleModel from "./CreateVehicleModel";
 import ListAutomobiles from "./ListAutomobiles";
 import CreateAutomobile from "./CreateAutomobile";
 
-
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
   const [model, setModel] = useState([]);
@@ -35,10 +34,10 @@ function App() {
 
   async function getAutomobiles() {
     const automobileUrl = "http://localhost:8100/api/automobiles/";
-    const response = await fetch(automobileUrl)
+    const response = await fetch(automobileUrl);
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       setAutomobile(data.autos);
     }
   }
@@ -56,10 +55,8 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturerList" element={<ManufacturerList />} />
-          <Route path="createmanufactuer" element={<CreateManufacturer />} />
           <Route path="listvehiclemodel" element={<ListVehicleModel />} />
           <Route path="createvehiclemodel" element={<CreateVehicleModel />} />
-          {/* <Route path="listautomobiles" element={<ListAutomobiles />} /> */}
           <Route path="createautomobile" element={<CreateAutomobile />} />
           <Route path="manufacturers">
             <Route
@@ -84,6 +81,17 @@ function App() {
               }
             />
           </Route>
+          <Route path="automobiles">
+            <Route
+              index
+              element={
+                <ListAutomobiles
+                  automobileList={automobile}
+                  getAutomobiles={getAutomobiles}
+                />
+              }
+            />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
@@ -91,4 +99,3 @@ function App() {
 }
 
 export default App;
-//
