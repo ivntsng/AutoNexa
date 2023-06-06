@@ -10,13 +10,17 @@ function App() {
   const [manufacturer, setManufacturer] = useState([]);
 
   async function getManufacturer() {
-    const manufacturerUrl = "http://localhost:8100/api/inventory";
+    const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
     const response = await fetch(manufacturerUrl);
     if (response.ok) {
-      let data = await response.json();
-      setManufacturer(data.manufacturer);
+      const data = await response.json();
+      setManufacturer(data.manufacturers);
     }
   }
+
+  useEffect(() => {
+    getManufacturer();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -24,7 +28,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="manufacturerList">
+          <Route path="manufacturers">
             <Route
               index
               element={
@@ -34,8 +38,11 @@ function App() {
                 />
               }
             />
+            <Route
+              path="new"
+              element={<CreateManufacturer getManufacturer={getManufacturer} />}
+            />
           </Route>
-          <Route path="createmanufactuer" element={<CreateManufacturer />} />
           <Route path="listvehiclemodel" element={<ListVehicleModel />} />
         </Routes>
       </div>

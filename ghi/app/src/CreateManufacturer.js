@@ -10,15 +10,15 @@ export default function CreateManufacturerForm({ getManufacturer }) {
   };
 
   useEffect(() => {
-    async function getManufacturer() {
+    async function listManufacturer() {
       const url = "http://localhost:8100/api/manufacturers";
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        setManufacturerNames(data.manufacturerNames);
+        setManufacturerNames(data.manufacturers);
       }
     }
-    getManufacturer();
+    listManufacturer();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -39,6 +39,7 @@ export default function CreateManufacturerForm({ getManufacturer }) {
     if (response.ok) {
       const newManufacturer = await response.json();
       setManufacturerName("");
+      getManufacturer();
     }
   };
 
