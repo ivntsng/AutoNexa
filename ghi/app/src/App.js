@@ -59,7 +59,7 @@ function App() {
           <Route path="createmanufactuer" element={<CreateManufacturer />} />
           <Route path="listvehiclemodel" element={<ListVehicleModel />} />
           <Route path="createvehiclemodel" element={<CreateVehicleModel />} />
-          {/* <Route path="listautomobiles" element={<ListAutomobiles />} /> */}
+          <Route path="listautomobiles" element={<ListAutomobiles />} />
           <Route path="createautomobile" element={<CreateAutomobile />} />
           <Route path="manufacturers">
             <Route
