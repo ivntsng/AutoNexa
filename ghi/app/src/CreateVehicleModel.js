@@ -1,4 +1,5 @@
 import { useState, useEffect} from 'react';
+import React from "react";
 
 function CreateVehicleModel(){
     const [name, setName] = useState('');
@@ -85,6 +86,8 @@ function CreateVehicleModel(){
             <button className="btn btn-primary">Create</button>
         </form>
     )
+function CreateVehicleModel() {
+  return <p>Creating a new vehicle model</p>;
 }
 
 export default CreateVehicleModel;
