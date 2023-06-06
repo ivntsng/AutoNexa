@@ -5,6 +5,10 @@ import ManufacturerList from "./ManufacturerList";
 import CreateManufacturer from "./CreateManufacturer";
 import ListVehicleModel from "./ListVehicleModel";
 import { useState, useEffect } from "react";
+import CreateVehicleModel from "./CreateVehicleModel";
+import ListAutomobiles from "./ListAutomobiles";
+import CreateAutomobile from "./CreateAutomobile";
+
 
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
@@ -39,6 +43,12 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="manufacturerList" element={<ManufacturerList />} />
+          <Route path="createmanufactuer" element={<CreateManufacturer />} />
+          <Route path="listvehiclemodel" element={<ListVehicleModel />} />
+          <Route path="createvehiclemodel" element={<CreateVehicleModel />} />
+          <Route path="listautomobiles" element={<ListAutomobiles />} />
+          <Route path="createautomobile" element={<CreateAutomobile />} />
           <Route path="manufacturers">
             <Route
               index
