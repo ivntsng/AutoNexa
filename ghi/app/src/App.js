@@ -13,7 +13,6 @@ function App() {
   const [manufacturer, setManufacturer] = useState([]);
   const [model, setModel] = useState([]);
   const [automobile, setAutomobile] = useState([]);
-  const [automobile, setAutomobile] = useState([]);
 
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
@@ -38,7 +37,6 @@ function App() {
     const response = await fetch(automobileUrl);
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       setAutomobile(data.autos);
     }
   }
@@ -57,7 +55,6 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturerList" element={<ManufacturerList />} />
           <Route path="listvehiclemodel" element={<ListVehicleModel />} />
-          <Route path="createvehiclemodel" element={<CreateVehicleModel />} />
           <Route path="createautomobile" element={<CreateAutomobile />} />
           <Route path="manufacturers">
             <Route
@@ -92,6 +89,10 @@ function App() {
                 />
               }
             />
+            <Route
+              path="create"
+              element={<CreateAutomobile getAutomobiles={getAutomobiles} />}
+            />
           </Route>
         </Routes>
       </div>
@@ -100,4 +101,3 @@ function App() {
 }
 
 export default App;
-//
