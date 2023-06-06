@@ -13,6 +13,7 @@ import CreateAutomobile from "./CreateAutomobile";
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
   const [model, setModel] = useState([]);
+  const [automobile, setAutomobile] = useState([]);
 
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
@@ -32,9 +33,20 @@ function App() {
     }
   }
 
+  async function getAutomobiles() {
+    const automobileUrl = "http://localhost:8100/api/automobiles/";
+    const response = await fetch(automobileUrl)
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data)
+      setAutomobile(data.autos);
+    }
+  }
+
   useEffect(() => {
     getManufacturer();
     getModels();
+    getAutomobiles();
   }, []);
 
   return (
@@ -47,7 +59,7 @@ function App() {
           <Route path="createmanufactuer" element={<CreateManufacturer />} />
           <Route path="listvehiclemodel" element={<ListVehicleModel />} />
           <Route path="createvehiclemodel" element={<CreateVehicleModel />} />
-          <Route path="listautomobiles" element={<ListAutomobiles />} />
+          {/* <Route path="listautomobiles" element={<ListAutomobiles />} /> */}
           <Route path="createautomobile" element={<CreateAutomobile />} />
           <Route path="manufacturers">
             <Route
