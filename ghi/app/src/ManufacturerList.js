@@ -1,9 +1,22 @@
 import React from "react";
 
-class ManufactuerList extends React.Component {
-  render() {
-    return <p>This is a manufacturer list</p>;
-  }
+export default function ManufacturerList({ manufacturerList, getManufacturer }) {
+  return (
+    <table className="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {manufacturerList.map((manufacturer) => {
+          return (
+            <tr key={manufacturer.id}>
+              <td>{manufacturer.name}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
 }
-
-export default ManufactuerList;
