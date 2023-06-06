@@ -44,7 +44,6 @@ function CreateVehicleModel(){
             setName('')
             setPicture('')
             setManufacturer('')
-            console.log(newVehicle)
         }
     }
     const fetchData = async () => {
@@ -66,11 +65,11 @@ function CreateVehicleModel(){
         <form onSubmit={handleSubmit}>
             <h1>Create a vehicle model</h1>
             <div className="form-floating mb-3">
-                <input onChange={handleNameChange} type="text" className="form-control" id="floatingInput" placeholder="name@example.com"/>
+                <input onChange={handleNameChange} type="text" value={name} className="form-control" id="floatingInput" placeholder="name@example.com"/>
                 <label>Model name...</label>
             </div>
             <div className="form-floating mb-3">
-                <input onChange={handlePictureChange} type="text" className="form-control" id="floatingPassword" placeholder="Password"/>
+                <input onChange={handlePictureChange} type="text" value={picture} className="form-control" id="floatingPassword" placeholder="Password"/>
                 <label>Picture URL...</label>
             </div>
             <select onChange={handleManufacturerChange} value={manufacturer} className="form-select" aria-label="Default select example">
