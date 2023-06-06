@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
+  const [model, setModel] = useState([]);
 
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
@@ -18,8 +19,19 @@ function App() {
     }
   }
 
+  async function getModels() {
+    const vehicleModelUrl = "http://localhost:8100/api/models/";
+    const response = await fetch(vehicleModelUrl);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setModel(data.models);
+    }
+  }
+
   useEffect(() => {
     getManufacturer();
+    getModels();
   }, []);
 
   return (
@@ -43,7 +55,14 @@ function App() {
               element={<CreateManufacturer getManufacturer={getManufacturer} />}
             />
           </Route>
-          <Route path="listvehiclemodel" element={<ListVehicleModel />} />
+          <Route path="models">
+            <Route
+              index
+              element={
+                <ListVehicleModel modelList={model} getModels={getModels} />
+              }
+            />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
