@@ -37,7 +37,7 @@ class AppointmentDetailEncoder(ModelEncoder):
         'vip',
         'canceled',
         'finished',
-        'technician'
+        'technician',
         'id'
     ]
     encoders = {
