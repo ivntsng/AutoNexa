@@ -145,3 +145,46 @@ def api_list_appointments(request):
                 {"message": 'technician id incorrect'},
                 status=400,
             )
+
+@require_http_methods(['GET', 'POST', 'DELETE'])
+def api_show_appointments(request, pk):
+    if request.method == 'GET':
+        try:
+            appointment = Appointment.objects.get(id=pk)
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentDetailEncoder,
+                safe=False
+            )
+        except Appointment.DoesNotExist:
+            return JsonResponse(
+                {'message': 'does not exist'},
+                status=404,
+            )
+    elif request.method == 'DELETE':
+        try:
+            appointment = Appointment.objects.filter(id=pk).delete()
+            return JsonResponse(appointment, encoder=AppointmentDetailEncoder, safe=False)
+        except Appointment.DoesNotExist:
+            return JsonResponse({'message': 'Does not exist'})
+
+    else:
+        try:
+            content = json.loads(request.body)
+            appointmnet = Appointment.objects.get(id=pk)
+            props = ['reason', 'date', 'technician_id', 'time']
+            for prop in props:
+                if prop in content:
+                    setattr(appointment, prop, content[prop])
+            appointment.save()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentDetailEncoder,
+                safe=False
+            )
+        except Appointment.DoesNotExist:
+            return JsonResponse({
+                'message': 'Does not exist'
+            },
+              status=400,
+            )
