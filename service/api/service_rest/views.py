@@ -95,7 +95,6 @@ def api_show_technician(request, pk):
                 {'message': 'could not get the technician'},
                 status=404,
             )
-        
     elif request.method == 'DELETE':
         count, _ = Technician.objects.filter(id=pk).delete()
         return JsonResponse({'deleted': count > 0})
@@ -120,4 +119,29 @@ def api_show_technician(request, pk):
             return JsonResponse(
                 {'message': 'technician does not exist'},
                 status=404,
+            )
+
+@require_http_methods(['GET', 'POST'])
+def api_list_appointments(request):
+    if request.method == 'GET':
+        appointment = Appointment.objects.all()
+        return JsonResponse(
+            {'appointments': appointment},
+            encoder=AppointmentDetailEncoder,
+        )
+    else:
+        content = json.loads(request.body)
+        try:
+            technician = Technician.objects.get(id=content['technician_id'])
+            content['technician'] = technician
+            appointment = Appointment.objects.create(**content)
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentDetailEncoder,
+                safe=False,
+            )
+        except Technician.DoesNotExist:
+            return JsonResponse(
+                {"message": 'technician id incorrect'},
+                status=400,
             )
