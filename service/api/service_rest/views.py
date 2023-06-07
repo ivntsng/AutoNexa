@@ -95,6 +95,7 @@ def api_show_technician(request, pk):
                 {'message': 'could not get the technician'},
                 status=404,
             )
+        
     elif request.method == 'DELETE':
         count, _ = Technician.objects.filter(id=pk).delete()
         return JsonResponse({'deleted': count > 0})
