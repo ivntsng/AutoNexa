@@ -9,12 +9,14 @@ import CreateVehicleModel from "./CreateVehicleModel";
 import ListAutomobiles from "./ListAutomobiles";
 import CreateAutomobile from "./CreateAutomobile";
 import ListAppointments from "./ListAppointments";
+import ListTechnicians from "./ListTechnicians";
 
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
   const [model, setModel] = useState([]);
   const [automobile, setAutomobile] = useState([]);
   const [appointment, setAppointment] = useState([]);
+  const [technician, setTechnician] = useState([]);
 
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
@@ -31,6 +33,7 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setModel(data.models);
+      console.log(data);
     }
   }
 
@@ -43,12 +46,22 @@ function App() {
     }
   }
 
-  async function getAppointment() {
-    const appointmentUrl = "http://localhost:8080/api/appointments/";
-    const response = await fetch(appointmentUrl);
+  // async function getAppointment() {
+  //   const appointmentUrl = "http://localhost:8080/api/appointments/";
+  //   const response = await fetch(appointmentUrl);
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setAppointment(data.appointments);
+  //   }
+  // }
+
+  async function getTechnician() {
+    const technicianUrl = "http://localhost:8080/api/technicians/";
+    const response = await fetch(technicianUrl);
     if (response.ok) {
       const data = await response.json();
-      setAppointment = data.appointments;
+      // console.log(data);
+      setTechnician(data.technicians);
     }
   }
 
@@ -56,7 +69,8 @@ function App() {
     getManufacturer();
     getModels();
     getAutomobiles();
-    getAppointment();
+    getTechnician();
+    // getAppointment();
   }, []);
 
   return (
@@ -65,9 +79,6 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="manufacturerList" element={<ManufacturerList />} />
-          <Route path="listvehiclemodel" element={<ListVehicleModel />} />
-          <Route path="createautomobile" element={<CreateAutomobile />} />
           <Route path="manufacturers">
             <Route
               index
@@ -110,13 +121,13 @@ function App() {
               element={<CreateAutomobile getAutomobiles={getAutomobiles} />}
             />
           </Route>
-          <Route path="appointments">
+          <Route path="technicians">
             <Route
               index
               element={
-                <ListAppointments
-                  appointmentList={automobile}
-                  getAppointment={getAppointment}
+                <ListTechnicians
+                  techniciansList={technician}
+                  getTechnician={getTechnician}
                 />
               }
             />

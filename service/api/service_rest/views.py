@@ -162,11 +162,8 @@ def api_show_appointments(request, pk):
                 status=404,
             )
     elif request.method == 'DELETE':
-        try:
-            appointment = Appointment.objects.filter(id=pk).delete()
-            return JsonResponse(appointment, encoder=AppointmentDetailEncoder, safe=False)
-        except Appointment.DoesNotExist:
-            return JsonResponse({'message': 'Does not exist'})
+        count, _ = Appointment.objects.filter(id=pk).delete()
+        return JsonResponse({'deleted': count > 0})
 
     else:
         try:
