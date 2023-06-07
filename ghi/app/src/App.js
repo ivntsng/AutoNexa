@@ -8,11 +8,20 @@ import { useState, useEffect } from "react";
 import CreateVehicleModel from "./CreateVehicleModel";
 import ListAutomobiles from "./ListAutomobiles";
 import CreateAutomobile from "./CreateAutomobile";
+import ListAppointments from "./ListAppointments";
+import ListTechnicians from "./ListTechnicians";
+import CreateTechnicianForm from "./CreateTechnician";
+import ListSale from "./ListSale";
+import ListSalesperson from "./ListSalesperson";
+import CreateSalesperson from "./CreateSalesperson";
 
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
   const [model, setModel] = useState([]);
   const [automobile, setAutomobile] = useState([]);
+  const [appointment, setAppointment] = useState([]);
+  const [technician, setTechnician] = useState([]);
+  const [salesPeople, setSalesPeople] = useState([]);
 
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
@@ -41,10 +50,40 @@ function App() {
     }
   }
 
+  // async function getAppointment() {
+  //   const appointmentUrl = "http://localhost:8080/api/appointments/";
+  //   const response = await fetch(appointmentUrl);
+  //   if (response.ok) {
+  //     const data = await response.json();
+  //     setAppointment(data.appointments);
+  //   }
+  // }
+
+  async function getTechnician() {
+    const technicianUrl = "http://localhost:8080/api/technicians/";
+    const response = await fetch(technicianUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setTechnician(data.technicians);
+    }
+  }
+
+  async function getSalesPeople() {
+    const salesUrl = "http://localhost:8090/api/salespeople/";
+    const response = await fetch(salesUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setSalesPeople(data.salespeople);
+    }
+  }
+
   useEffect(() => {
     getManufacturer();
     getModels();
     getAutomobiles();
+    getTechnician();
+    getSalesPeople();
+    // getAppointment();
   }, []);
 
   return (
@@ -53,9 +92,6 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="manufacturerList" element={<ManufacturerList />} />
-          <Route path="listvehiclemodel" element={<ListVehicleModel />} />
-          <Route path="createautomobile" element={<CreateAutomobile />} />
           <Route path="manufacturers">
             <Route
               index
@@ -96,6 +132,36 @@ function App() {
             <Route
               path="create"
               element={<CreateAutomobile getAutomobiles={getAutomobiles} />}
+            />
+          </Route>
+          <Route path="technicians">
+            <Route
+              index
+              element={
+                <ListTechnicians
+                  techniciansList={technician}
+                  getTechnician={getTechnician}
+                />
+              }
+            />
+            <Route
+              path="create"
+              element={<CreateTechnicianForm getTechnician={getTechnician} />}
+            />
+          </Route>
+          <Route path="salespeople">
+            <Route
+              index
+              element={
+                <ListSalesperson
+                  salesPersonList={salesPeople}
+                  getSalesPeople={getSalesPeople}
+                />
+              }
+            />
+            <Route
+              path="create"
+              element={<CreateSalesperson getSalesPeople={getSalesPeople} />}
             />
           </Route>
         </Routes>

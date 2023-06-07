@@ -105,7 +105,7 @@ export default function CreateAutomobileForm({ getAutomobiles }) {
                 value={vin}
                 placeholder="vin"
                 required
-                type="vin"
+                type="text"
                 name="year"
                 id="vin"
                 className="form-control"
