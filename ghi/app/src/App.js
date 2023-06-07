@@ -11,6 +11,9 @@ import CreateAutomobile from "./CreateAutomobile";
 import ListAppointments from "./ListAppointments";
 import ListTechnicians from "./ListTechnicians";
 import CreateTechnicianForm from "./CreateTechnician";
+import ListSale from "./ListSale";
+import ListSalesperson from "./ListSalesperson";
+import CreateSalesperson from "./CreateSalesperson";
 
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
@@ -18,6 +21,7 @@ function App() {
   const [automobile, setAutomobile] = useState([]);
   const [appointment, setAppointment] = useState([]);
   const [technician, setTechnician] = useState([]);
+  const [salesPeople, setSalesPeople] = useState([]);
 
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
@@ -64,11 +68,21 @@ function App() {
     }
   }
 
+  async function getSalesPeople() {
+    const salesUrl = "http://localhost:8090/api/salespeople/";
+    const response = await fetch(salesUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setSalesPeople(data.salespeople);
+    }
+  }
+
   useEffect(() => {
     getManufacturer();
     getModels();
     getAutomobiles();
     getTechnician();
+    getSalesPeople();
     // getAppointment();
   }, []);
 
@@ -133,6 +147,21 @@ function App() {
             <Route
               path="create"
               element={<CreateTechnicianForm getTechnician={getTechnician} />}
+            />
+          </Route>
+          <Route path="salespeople">
+            <Route
+              index
+              element={
+                <ListSalesperson
+                  salesPersonList={salesPeople}
+                  getSalesPeople={getSalesPeople}
+                />
+              }
+            />
+            <Route
+              path="create"
+              element={<CreateSalesperson getSalesPeople={getSalesPeople} />}
             />
           </Route>
         </Routes>
