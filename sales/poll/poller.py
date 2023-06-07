@@ -16,11 +16,12 @@ from sales_rest.models import AutomobileVO
 
 def poll(repeat=True):
     while True:
-        print('Sales poller polling for data')
+        print('polling')
         try:
-            url = 'http://project-beta-inventory-api-1:8000/api/automobiles/'
+            url = 'http://inventory-api:8000/api/automobiles/'
             response = requests.get(url)
             content = json.loads(response.content)
+            print('Sales poller polling for data')
             for automobile in content["autos"]:
                 AutomobileVO.objects.update_or_create(
                     vin=automobile["vin"],
@@ -31,14 +32,14 @@ def poll(repeat=True):
             # Write your polling logic, here
             # Do not copy entire file
 
-            
+
         except Exception as e:
             print(e, file=sys.stderr)
 
         if (not repeat):
             break
 
-        time.sleep(60)
+        time.sleep(5)
 
 
 if __name__ == "__main__":
