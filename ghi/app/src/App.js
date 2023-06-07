@@ -10,6 +10,7 @@ import ListAutomobiles from "./ListAutomobiles";
 import CreateAutomobile from "./CreateAutomobile";
 import ListAppointments from "./ListAppointments";
 import ListTechnicians from "./ListTechnicians";
+import CreateTechnicianForm from "./CreateTechnician";
 
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
@@ -33,7 +34,6 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setModel(data.models);
-      console.log(data);
     }
   }
 
@@ -60,7 +60,6 @@ function App() {
     const response = await fetch(technicianUrl);
     if (response.ok) {
       const data = await response.json();
-      // console.log(data);
       setTechnician(data.technicians);
     }
   }
@@ -133,7 +132,7 @@ function App() {
             />
             <Route
               path="create"
-              element={<CreateAutomobile getAutomobiles={getAutomobiles} />}
+              element={<CreateTechnicianForm getTechnician={getTechnician} />}
             />
           </Route>
         </Routes>
