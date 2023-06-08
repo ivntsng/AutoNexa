@@ -56,7 +56,6 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setAutomobile(data.autos);
-      console.log(data);
     }
   }
 
@@ -226,6 +225,8 @@ function App() {
                 <ListServiceAppointment
                   appointmentsList={appointment}
                   getAppointment={getAppointment}
+                  automobileList={automobile}
+                  getAutomobiles={getAutomobiles}
                 />
               }
             />

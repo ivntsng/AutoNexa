@@ -1,7 +1,13 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 
-export default function AppointmentsList({ appointmentsList, getAppointment }) {
+export default function AppointmentsList({
+  appointmentsList,
+  getAppointment,
+  automobileList,
+  getAutomobiles,
+}) {
   const handleCancel = (id) => {
     fetch(`http://localhost:8080/api/appointments/${id}/cancel/`, {
       method: "PUT",
@@ -32,6 +38,10 @@ export default function AppointmentsList({ appointmentsList, getAppointment }) {
     });
   };
 
+  // useEffect(() => {
+  //   getAutomobiles();
+  // }, []);
+
   return (
     <div>
       <h1>Service Appointments</h1>
@@ -49,18 +59,15 @@ export default function AppointmentsList({ appointmentsList, getAppointment }) {
         </thead>
         <tbody>
           {appointmentsList.map((appointment) => {
+            // automobileList.filter(() => )
             if (appointment.status === "") {
-              const isVIP =
-                appointment.vip ||
-                (appointment.automobile &&
-                  appointment.automobile.sold === true);
-              console.log("isVIP:", isVIP);
-              console.log("appointment:", appointment);
-              console.log("automobile:", appointment.automobile);
+              const curAutomobile = automobileList.filter(
+                (a) => a.vin === appointment.vin
+              )[0];
               return (
                 <tr key={appointment.id}>
                   <td>{appointment.vin}</td>
-                  <td>{isVIP ? "true" : "false"}</td>
+                  <td>{curAutomobile && curAutomobile.sold ? "Yes" : "No"}</td>
                   <td>{appointment.customer}</td>
                   <td>{appointment.date}</td>
                   <td>{appointment.time}</td>
