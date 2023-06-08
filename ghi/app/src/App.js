@@ -68,7 +68,7 @@ function App() {
     }
   }
 
-  async function getTechnician() {
+  async function getTechnicians() {
     const technicianUrl = "http://localhost:8080/api/technicians/";
     const response = await fetch(technicianUrl);
     if (response.ok) {
@@ -108,7 +108,7 @@ function App() {
     getManufacturer();
     getModels();
     getAutomobiles();
-    getTechnician();
+    getTechnicians();
     getSalesPeople();
     getAppointment();
     getCustomer();
@@ -168,13 +168,13 @@ function App() {
               element={
                 <ListTechnicians
                   techniciansList={technician}
-                  getTechnician={getTechnician}
+                  getTechnicians={getTechnicians}
                 />
               }
             />
             <Route
               path="create"
-              element={<CreateTechnicianForm getTechnician={getTechnician} />}
+              element={<CreateTechnicianForm getTechnicians={getTechnicians} />}
             />
           </Route>
           <Route path="salespeople">
