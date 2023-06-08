@@ -12,9 +12,11 @@ Team:
 
 3. Utilize Docker to build and execute the project by executing the following commands:
 
-   > Create a Docker volume named "beta-data" using: docker volume create beta-data.
-   > Build the Docker services using: docker-compose build.
-   > Start the Docker services using: docker-compose up.
+  ```
+  Create a Docker volume named "beta-data" using: docker volume create beta-data.
+  Build the Docker services using: docker-compose build.
+  Start the Docker services using: docker-compose up.
+  ```
 
 4. Verify that all Docker containers are running once the above commands have been executed.
 
