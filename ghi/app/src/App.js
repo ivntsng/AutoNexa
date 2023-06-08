@@ -19,6 +19,8 @@ import ListServiceAppointment from "./ListServiceAppointment";
 import ListServiceHistory from "./ListServiceHistory";
 import ListSalesHistory from "./ListSalesHistory";
 import CreateSale from "./CreateSale";
+import CreateCustomer from "./CreateCustomer";
+import ListCustomers from "./ListCustomers";
 
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
@@ -28,6 +30,7 @@ function App() {
   const [technician, setTechnician] = useState([]);
   const [salesPeople, setSalesPeople] = useState([]);
   const [sales, setSales] = useState([]);
+  const [customer, setCustomer] = useState([]);
 
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
@@ -84,11 +87,20 @@ function App() {
   }
 
   async function getSales() {
-    const saleUrl = "	http://localhost:8090/api/sales/";
+    const saleUrl = "http://localhost:8090/api/sales/";
     const response = await fetch(saleUrl);
     if (response.ok) {
       const data = await response.json();
       setSales(data.sales);
+    }
+  }
+
+  async function getCustomer() {
+    const customerUrl = "http://localhost:8090/api/customers/";
+    const response = await fetch(customerUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setCustomer(data.customers);
     }
   }
 
@@ -98,7 +110,8 @@ function App() {
     getAutomobiles();
     getTechnician();
     getSalesPeople();
-    // getAppointment();
+    getAppointment();
+    getCustomer();
   }, []);
 
   return (
@@ -177,6 +190,21 @@ function App() {
             <Route
               path="create"
               element={<CreateSalesperson getSalesPeople={getSalesPeople} />}
+            />
+          </Route>
+          <Route path="customers">
+            <Route
+              index
+              element={
+                <ListCustomers
+                  customerList={customer}
+                  getCustomer={getCustomer}
+                />
+              }
+            />
+            <Route
+              path="create"
+              element={<CreateCustomer getCustomer={getCustomer} />}
             />
           </Route>
           <Route path="sales">
