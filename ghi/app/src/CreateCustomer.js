@@ -1,3 +1,3 @@
-export default function RecordSale({ getRecord }) {
+export default function CreateCustomer({ getCustomer }) {
   return <p>TESTING customer</p>;
 }
