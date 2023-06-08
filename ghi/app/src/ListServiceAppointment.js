@@ -50,10 +50,17 @@ export default function AppointmentsList({ appointmentsList, getAppointment }) {
         <tbody>
           {appointmentsList.map((appointment) => {
             if (appointment.status === "") {
+              const isVIP =
+                appointment.vip ||
+                (appointment.automobile &&
+                  appointment.automobile.sold === true);
+              console.log("isVIP:", isVIP);
+              console.log("appointment:", appointment);
+              console.log("automobile:", appointment.automobile);
               return (
                 <tr key={appointment.id}>
                   <td>{appointment.vin}</td>
-                  <td>{appointment.vip ? "Yes" : "No"}</td>
+                  <td>{isVIP ? "true" : "false"}</td>
                   <td>{appointment.customer}</td>
                   <td>{appointment.date}</td>
                   <td>{appointment.time}</td>

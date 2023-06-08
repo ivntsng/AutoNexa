@@ -56,6 +56,7 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setAutomobile(data.autos);
+      console.log(data);
     }
   }
 
