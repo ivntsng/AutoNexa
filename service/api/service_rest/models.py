@@ -28,7 +28,7 @@ class Appointment(models.Model):
     date = models.DateField(max_length=30, blank=True, null=True)
     time = models.TimeField(max_length=30, blank=True, null=True)
     reason = models.TextField()
-    status = models.BooleanField(default=False)
+    status = models.CharField(max_length=50)
     vip = models.BooleanField(default=False)
     canceled = models.BooleanField(default=False)
     finished = models.BooleanField(default=False)
