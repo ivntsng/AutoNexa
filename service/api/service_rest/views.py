@@ -185,3 +185,29 @@ def api_show_appointments(request, pk):
             },
               status=400,
             )
+
+@require_http_methods(['PUT'])
+def api_update_appointment_status(request, pk):
+    if request.method == 'PUT':
+        try:
+            content = json.loads(request.body)
+            print(content)
+            appointment = Appointment.objects.get(id=pk)
+            if 'status' in content:
+                status = content['status']
+                if status == 'finished':
+                    appointment.status = 'finished'
+                elif status == 'canceled':
+                    appointment.status = 'canceled'
+                appointment.save()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentDetailEncoder,
+                safe=False
+            )
+        except Appointment.DoesNotExist:
+            return JsonResponse({
+                'message': 'Appointment does not exist'
+            },
+              status=400,
+            )

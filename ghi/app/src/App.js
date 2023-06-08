@@ -223,7 +223,7 @@ function App() {
               index
               element={
                 <ListServiceAppointment
-                  appointmentList={appointment}
+                  appointmentsList={appointment}
                   getAppointment={getAppointment}
                 />
               }
@@ -236,7 +236,12 @@ function App() {
             />
             <Route
               path="history"
-              element={<ListServiceHistory getAppointment={getAppointment} />}
+              element={
+                <ListServiceHistory
+                  serviceList={appointment}
+                  getAppointment={getAppointment}
+                />
+              }
             />
           </Route>
         </Routes>
