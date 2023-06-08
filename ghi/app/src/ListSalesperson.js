@@ -18,7 +18,6 @@ function ListSalespeople() {
 
     <table className="table table-striped">
         <thead>
-        <h2>Salespeople</h2>
             <tr>
             <th>Employee ID</th>
             <th>First Name</th>
