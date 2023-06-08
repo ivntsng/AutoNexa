@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-export default function RecordSale({ getRecord }) {
+function RecordSale() {
   return (
     <p>List of customers</p>
     // <table className="table table-striped">
