@@ -14,6 +14,11 @@ import CreateTechnicianForm from "./CreateTechnician";
 import ListSale from "./ListSale";
 import ListSalesperson from "./ListSalesperson";
 import CreateSalesperson from "./CreateSalesperson";
+import CreateServiceAppointment from "./CreateServiceAppointment";
+import ListServiceAppointment from "./ListServiceAppointment";
+import ListServiceHistory from "./ListServiceHistory";
+import ListSalesHistory from "./ListSalesHistory";
+import CreateSale from "./CreateSale";
 
 function App() {
   const [manufacturer, setManufacturer] = useState([]);
@@ -22,6 +27,7 @@ function App() {
   const [appointment, setAppointment] = useState([]);
   const [technician, setTechnician] = useState([]);
   const [salesPeople, setSalesPeople] = useState([]);
+  const [sales, setSales] = useState([]);
 
   async function getManufacturer() {
     const manufacturerUrl = "http://localhost:8100/api/manufacturers/";
@@ -50,14 +56,14 @@ function App() {
     }
   }
 
-  // async function getAppointment() {
-  //   const appointmentUrl = "http://localhost:8080/api/appointments/";
-  //   const response = await fetch(appointmentUrl);
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     setAppointment(data.appointments);
-  //   }
-  // }
+  async function getAppointment() {
+    const appointmentUrl = "http://localhost:8080/api/appointments/";
+    const response = await fetch(appointmentUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setAppointment(data.appointments);
+    }
+  }
 
   async function getTechnician() {
     const technicianUrl = "http://localhost:8080/api/technicians/";
@@ -74,6 +80,15 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setSalesPeople(data.salespeople);
+    }
+  }
+
+  async function getSales() {
+    const saleUrl = "	http://localhost:8090/api/sales/";
+    const response = await fetch(saleUrl);
+    if (response.ok) {
+      const data = await response.json();
+      setSales(data.sales);
     }
   }
 
@@ -162,6 +177,38 @@ function App() {
             <Route
               path="create"
               element={<CreateSalesperson getSalesPeople={getSalesPeople} />}
+            />
+          </Route>
+          <Route path="sales">
+            <Route
+              index
+              element={<ListSale salesList={sales} getSales={getSales} />}
+            />
+            <Route path="create" element={<CreateSale getSales={getSales} />} />
+            <Route
+              path="history"
+              element={<ListSalesHistory getSales={getSales} />}
+            />
+          </Route>
+          <Route path="appointments">
+            <Route
+              index
+              element={
+                <ListServiceAppointment
+                  appointmentList={appointment}
+                  getAppointment={getAppointment}
+                />
+              }
+            />
+            <Route
+              path="create"
+              element={
+                <CreateServiceAppointment getAppointment={getAppointment} />
+              }
+            />
+            <Route
+              path="history"
+              element={<ListServiceHistory getAppointment={getAppointment} />}
             />
           </Route>
         </Routes>
