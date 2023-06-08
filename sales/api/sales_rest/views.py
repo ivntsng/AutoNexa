@@ -196,3 +196,25 @@ def api_list_sales(request):
             safe=False,
 
         )
+
+
+@require_http_methods(["GET", "DELETE"])
+def api_sale_detail(request, id):
+    if request.method == "GET":
+        try:
+            sale = Sale.objects.get(id=id)
+            return JsonResponse(
+                {"sale": sale},
+                encoder = SaleEncoder,
+                safe = False
+            )
+        except Sale.DoesNotExist:
+            return JsonResponse(
+                {"message": "This sale doesn't exist."},
+                status = 400
+            )
+    else:
+        count, _ = Sale.objects.filter(id=id).delete()
+        return JsonResponse(
+            {"deleted": count > 0}
+        )
