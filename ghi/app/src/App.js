@@ -223,7 +223,7 @@ function App() {
               index
               element={
                 <ListServiceAppointment
-                  appointmentList={appointment}
+                  appointmentsList={appointment}
                   getAppointment={getAppointment}
                 />
               }
