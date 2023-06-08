@@ -70,7 +70,7 @@ function CreateVehicleModel() {
           value={name}
           className="form-control"
           id="floatingInput"
-          placeholder="name@example.com"
+          placeholder=""
         />
         <label>Model name...</label>
       </div>
