@@ -175,5 +175,40 @@ microservice, here.
 
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+Sales microservice utilizes 4 models; Salesperson, Customer, Sale, and an AutomobileVO.
+As shown in the diagram above, the Sale Model can be the Root Aggregate of this collage, due to it being dependent on the other 3 models to ensure a successsful sale.
+
+It can even be seen in the endpoint of creating a sale record that the drop down for Automobile VIN (which comes from the poller of inventory), a salesperson from the list of salespeople, and the customer from a list of customers.
+
+Because the status of an unsold automobile is `false` there is a dependence needed between the inventory poller, and the form for creating a sale to ensure automobiles with `"sold": true` is not shown in that populated list dropdown.
+
+Poller then automatically updates the database of available automobiles, for which create sale record can utilize to ensure an already sold car, is not available to be sold again.
+
+### Automobile Poller
+First must complete the poller.py file to allow communication between the automobileVO model and the Sales model. Only update the code indicated by comments in `sales/poll/poller.py`. Do not alter code anywhere else. Poller should pass tests and should be executed from Docker Sales poller container using `python test_poller.py`.
+
+
+### Salespeople RESTful API Endpoints
+Must create the following RESTful APIs endpoints via backend view functions:
+![Salespeople Endpoints](salespeople.png)
+
+
+
+
+### Customer RESTful API Endpoints
+Must create the following RESTful APIs endpoints via backend view functions:
+![Customer Endpoints](customers.png)
+
+
+### Sale RESTful API Endpoints
+Must create the following RESTful APIs endpoints via backend view functions:
+![Sales Endpoints](salesrecord.png)
+
+
+### Notes
+- Each endpoint should return a `400` or `404` error if unsuccessful or attempting to access a model object that does not exist.
+- **Your API should be able to pass the included tests.** Can find API tests within `sales/api/tests` folder.
+Can run the API tests from Docker Sales API container using `python manage.py test.`
+## Authors
+- [@James Lee](https://gitlab.com/eeHyunwoo)
+- [@Ivan Tsang](https://gitlab.com/ivntsng)
