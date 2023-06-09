@@ -1,16 +1,16 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
 
-export default function CreateSale({getSale}) {
-  const [automobile, setAutomobile] = useState('');
+export default function CreateSale({ getSales, getCustomer }) {
+  const [automobile, setAutomobile] = useState("");
   const [automobiles, setAutomobiles] = useState([]);
 
-  const [salesperson, setSalesperson] = useState('');
+  const [salesperson, setSalesperson] = useState("");
   const [salespersons, setSalespersons] = useState([]);
 
-  const [customer, setCustomer] = useState('');
-  const [customers, setCustomers] = useState('');
+  const [customer, setCustomer] = useState("");
+  const [customers, setCustomers] = useState([]);
 
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState("");
 
   const handleAutomobileChange = (event) => {
     const value = event.target.value;
@@ -30,15 +30,15 @@ export default function CreateSale({getSale}) {
   const handlePriceChange = (event) => {
     const value = event.target.value;
     setPrice(value);
-  }
+  };
 
-  useEffect( () => {
+  useEffect(() => {
     async function ListAutomobiles() {
       const url = "http://localhost:8100/api/automobiles/";
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        const availableAutomobiles = data.autos.filter(auto => !auto.sold);
+        const availableAutomobiles = data.autos.filter((auto) => !auto.sold);
         setAutomobiles(availableAutomobiles);
       }
     }
@@ -56,7 +56,7 @@ export default function CreateSale({getSale}) {
       const response = await fetch(url);
       if (response.ok) {
         const data = await fetch(url);
-        setCustomers(data.customers)
+        setCustomers(data.customers);
       }
     }
 
@@ -65,7 +65,7 @@ export default function CreateSale({getSale}) {
     ListCustomers();
   }, []);
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {};
     data.automobile = automobile;
@@ -92,6 +92,72 @@ export default function CreateSale({getSale}) {
   };
 
   return (
-    <p>I CANT DO THIS JSX!!!!</p>
-  )
+    <div className="justify-content-center align-items-center">
+      <div className="shadow p-4 mt-4">
+        <h1>Create Sale</h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Automobile VIN</label>
+          </div>
+          <div className="form-floating mb-3">
+            <select
+              onChange={handleAutomobileChange}
+              value={automobile}
+              className="form-select"
+              aria-label="Default select example"
+            >
+              <option>Choose an automobile VIN...</option>
+              {automobiles.map((automobile) => {
+                return (
+                  <option key={automobile.id} value={automobile.vin}>
+                    {automobile.vin}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div>
+            <label>Salesperson</label>
+          </div>
+          <div className="form-floating mb-3">
+            <select
+              onChange={handleSalespersonChange}
+              value={salesperson}
+              className="form-select"
+              aria-label="Default select example"
+            >
+              <option>Choose a salesperson...</option>
+              {salespersons.map((salesperson) => {
+                return (
+                  <option key={salesperson.id} value={salesperson.employee_id}>
+                    {salesperson.first_name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+          <div>
+            <label>Customer</label>
+          </div>
+          <div className="form-floating mb-3">
+            <select
+              onChange={handleCustomerChange}
+              value={customer}
+              className="form-select"
+              aria-label="Default select example"
+            >
+              <option>Choose a customer...</option>
+              {customers.map((customer) => {
+                return (
+                  <option key={customer.id} value={customer.id}>
+                    {customer.first_name}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
