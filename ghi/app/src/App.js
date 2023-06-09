@@ -83,7 +83,6 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setSalesPeople(data.salespeople);
-      console.log(data)
     }
   }
 
