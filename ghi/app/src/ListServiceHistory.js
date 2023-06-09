@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
-export default function GetServiceHistory({ serviceList }) {
+export default function GetServiceHistory({
+  serviceList,
+  automobileList,
+  getAutomobiles,
+}) {
   const [vin, setVin] = useState("");
 
   const handleSearchInputChange = (event) => {
@@ -69,11 +73,16 @@ export default function GetServiceHistory({ serviceList }) {
                 service.status === "finished" ||
                 service.status === "canceled"
               ) {
+                const curAutomobile = automobileList.filter(
+                  (a) => a.vin === service.vin
+                )[0];
                 const dateTimeFormatted = DateTimeFormat(service.date_time);
                 return (
                   <tr key={service.id}>
                     <td>{service.vin}</td>
-                    <td>{service.vip ? "Yes" : "No"}</td>
+                    <td>
+                      {curAutomobile && curAutomobile.sold ? "Yes" : "No"}
+                    </td>
                     <td>{service.customer}</td>
                     <td>{dateTimeFormatted}</td>
                     <td>{service.technician.first_name}</td>
