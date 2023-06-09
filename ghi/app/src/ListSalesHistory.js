@@ -7,6 +7,7 @@ export default function SalesHistory({ getSales }) {
 
   const handleSalespersonChange = (event) => {
     const value = event.target.value;
+    setSalespersons(value)
   };
 
   useEffect(() => {
@@ -14,8 +15,8 @@ export default function SalesHistory({ getSales }) {
       const url = "http://localhost:8090/api/salespeople/";
       const response = await fetch(url);
       if (response.ok) {
-        const data = await response.json();
-        setSalesperson(data.salespeople);
+        const data = await response.json()
+        setSalespersons(data.salespeople)
       }
     }
     async function ListSales() {
@@ -31,5 +32,42 @@ export default function SalesHistory({ getSales }) {
     ListSales();
   }, []);
 
-  return <p>TEST</p>;
+  return (
+    <div className="justify-content-center align-items-center">
+    <div className="shadow p-4 mt-4">
+      <h1>Salesperson History</h1>
+
+          </div>
+          <div className="form-floating mb-3">
+            <select
+            onChange={handleSalespersonChange}
+            value={salesperson}
+            className="form-select"
+            aria-label="Default select example"
+            >
+              <option>Choose a salesperson...</option>
+              {salespersons.map((salesperson) => {
+                return (
+                  <option key={salesperson.id} value={salesperson.employee_id}>
+                    {salesperson.first_name}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>Salesperson</th>
+                <th>Customer</th>
+                <th>Automobile VIN</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* {sales.filter(sale => sale.salesperson.first_name === )} */}
+            </tbody>
+          </table>
+          </div>
+  )
 }

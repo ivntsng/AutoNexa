@@ -83,6 +83,7 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setSalesPeople(data.salespeople);
+      console.log(data)
     }
   }
 
@@ -253,6 +254,8 @@ function App() {
                   getAppointment={getAppointment}
                   automobileList={automobile}
                   getAutomobiles={getAutomobiles}
+                  getSales={getSales}
+                  getSalesPeople={getSalesPeople}
                 />
               }
             />
