@@ -192,17 +192,55 @@ First must complete the poller.py file to allow communication between the automo
 Must create the following RESTful APIs endpoints via backend view functions:
 ![Salespeople Endpoints](salespeople.png)
 
+#### **Add a salesperson**
+Must create a form that allows user to enter the first and last name, as well as an employee ID.
+When form submitted, salesperson created in the applications database and rendered onto the salesperson list.
+Then must create a link in the navbar in `Nav.js` to connect the element to the corresponding JS file.
 
+![Add Salesperson](AddSalesperson.png)
 
+#### **List all salespeople**
+Must create a form that allows user to view the entire list of all registered salespeople in the database.
+
+![List Salespeople](ListofSalespeople.png)
 
 ### Customer RESTful API Endpoints
 Must create the following RESTful APIs endpoints via backend view functions:
 ![Customer Endpoints](customers.png)
 
+#### **Add a customer**
+Must create a form that allows user to enter the first and last name, address, and phone number.
+When form submitted, customer is created in the applications database and rendered onto customers list.
+Then must create a link in the navbar in `Nav.js` to connect the element to the corresponding JS file.
+
+![Add Customer](AddCustomer.png)
+
+#### **List all customers**
+Must create a form that allows user to view the entire list of all registered customers in the database.
+
+![List Customers](ListCustomers.png)
 
 ### Sale RESTful API Endpoints
 Must create the following RESTful APIs endpoints via backend view functions:
 ![Sales Endpoints](salesrecord.png)
+
+#### **Record a new sale**
+Must create a form that allows user to select an available automobile using VIN as its identifying property from the inventory database utilizing poller refreshing the inventories database.
+Then must select a salesperson and customer from database.
+Then input the price for that automobile sale.
+
+![Create Sale](CreateSale.png)
+
+#### **List all sales**
+Must create a form that allows user to view entire list of all completed sales in the database.
+
+![List Sales](ListSales.png)
+
+#### **Salesperson History**
+You must show a list of sales by a specific salesperson. Done by creating a page with a dropdown populated with existing salespeople. When dropdown selection of salespeople changes, the list of sales changes to show all sales associated with the selected salesperson. List of sales contains salesperson, the customer, the automobile VIN, and the price of the sale.
+Then must create a link in the navbar in `Nav.js` to connect the element to the corresponding JS file.
+
+![List Salesperson History](ListSalespersonsHistory.png)
 
 
 ### Notes
