@@ -31,13 +31,13 @@ Introducing the service microservice!
 
 ###Service Appointments:
 
-| Description                          | Method | URL                                                           |
-| ------------------------------------ | ------ | ------------------------------------------------------------- |
-| List service appointments            | GET    | http://localhost:8080/api/serviceappointment/                 |
-| Create service appointment           | POST   | http://localhost:8080/api/serviceappointment/                 |
-| Delete service appointment           | DELETE | http://localhost:8080/api/serviceappointment/<int:id>         |
-| Set appointment status to 'canceled' | PUT    | http://localhost:8080/api/serviceappointment/<int:id>/cancel/ |
-| Set appointment status to 'finished' | PUT    | http://localhost:8080/api/serviceappointment/<int:id>/finish/ |
+| Description                          | Method | URL                                                     |
+| ------------------------------------ | ------ | ------------------------------------------------------- |
+| List service appointments            | GET    | http://localhost:8080/api/appointments/                 |
+| Create service appointment           | POST   | http://localhost:8080/api/appointments/                 |
+| Delete service appointment           | DELETE | http://localhost:8080/api/appointments/<int:id>         |
+| Set appointment status to 'canceled' | PUT    | http://localhost:8080/api/appointments/<int:id>/cancel/ |
+| Set appointment status to 'finished' | PUT    | http://localhost:8080/api/appointments/<int:id>/finish/ |
 
 ##### Create Service Appointments:
 
@@ -123,7 +123,9 @@ Introducing the technicians!
 | Delete a specific technician | DELETE | http://localhost:8080/api/technicians/:id |
 
 ##### Creating a technician:
+
 To create a technician you'd need to use a `POST` request to `http://localhost:8080/api/technicians/` in the following format:
+
 ```
 {
   "first_name": "Ivan",
@@ -133,7 +135,9 @@ To create a technician you'd need to use a `POST` request to `http://localhost:8
 ```
 
 ##### Getting a list of technicians:
+
 To get a list of technicians you'd need to use a `GET` request to `http://localhost:8080/api/technicians/` and it'll show in the following format:
+
 ```
 {
 	"technicians": [
@@ -148,7 +152,9 @@ To get a list of technicians you'd need to use a `GET` request to `http://localh
 ```
 
 ##### Deleting a technician:
+
 To remove a technician you'd need to use a `DELETE` request to `http://localhost:8080/api/technicians/:id` and it'll show in the following format:
+
 ```
 {
 	"deleted": true
@@ -156,20 +162,24 @@ To remove a technician you'd need to use a `DELETE` request to `http://localhost
 ```
 
 ## Models:
+
 The service model has 3 models:
 
 ##### Technician:
+
 - first_name
 - last_name
 - employee_id
 
 ##### AutomobileVO:
+
 - vin
 - year
 - color
 - sold
 
 ##### Appointment:
+
 - vin
 - customer
 - date_time
