@@ -156,7 +156,29 @@ To remove a technician you'd need to use a `DELETE` request to `http://localhost
 ```
 
 ## Models:
-The service model has 3 models 
+The service model has 3 models:
+
+##### Technician:
+- first_name
+- last_name
+- employee_id
+
+##### AutomobileVO:
+- vin
+- year
+- color
+- sold
+
+##### Appointment:
+- vin
+- customer
+- date_time
+- reason
+- status
+- vip
+- canceled
+- finished
+- technician
 
 ## Sales microservice
 
