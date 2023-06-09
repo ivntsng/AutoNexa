@@ -102,7 +102,6 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setCustomer(data.customers);
-      console.log(data)
     }
   }
 
@@ -215,7 +214,12 @@ function App() {
               index
               element={<ListSale salesList={sales} getSales={getSales} />}
             />
-            <Route path="create" element={<CreateSale getSales={getSales} getCustomer={getCustomer} />} />
+            <Route
+              path="create"
+              element={
+                <CreateSale getSales={getSales} getCustomer={getCustomer} />
+              }
+            />
             <Route
               path="history"
               element={<ListSalesHistory getSales={getSales} />}

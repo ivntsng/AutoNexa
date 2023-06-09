@@ -1,30 +1,37 @@
 # CarCar
+
 A web application that manages a Car companies salespeople, customers, automobile inventory, and the sales and services of relevant components.
 
 Team:
 
 - Ivan Tsang - Auto Service
-- Person 2 - Which microservice?
-- Ivan Tsang - Service
 - James Lee - Sale
 
 ## How To Get Started:
+
 **Ensure you have the neccessary programs; Docker, Git, Insomnia, Node.js**
+
 1. Fork the projects repository [GitLab Repo](https://gitlab.com/sjp19-public-resources/sjp-2022-april/project-beta).
 2. Clone onto your local environment in project directory.
+
 ```
 git clone <<repository url here>>
 ```
+
 3. Build up the project and run the containers with following commands:
+
 ```
 docker volume create beta-data
 docker-compose build
 docker-compose up
 ```
+
 After making sure all containers are good to go, visit [CarCar Webpage](http://localhost:3000/)
+
 ## Design
 
 This project conists of 3 individual microservices that all communicate and interact with each other.
+
 - Inventory
 - Sales
 - Services
@@ -32,17 +39,22 @@ This project conists of 3 individual microservices that all communicate and inte
 ![CarCar Diagram](CarCar Diagram.png)
 
 ## Accessing RESTful API Endpoints for Inventory
+
 The backend is complete for this portion and we will be focusing on the front end creating the React components for associating API endpoints.
 
 ### Manufacture Endpoints
+
 ![Manufacture Endpoints](ManufactureEndpoints.png)
 For POST requests, can post the following JSON formatted body into the Insomnia JSON window:
+
 ```
 {
     "name": "Tesla"
 }
 ```
+
 For GET requests of the list of manufacturers or a specific manufacture id, the response will have the following structure:
+
 ```
 {
   "manufacturers": [
@@ -54,7 +66,9 @@ For GET requests of the list of manufacturers or a specific manufacture id, the 
   ]
 }
 ```
+
 For GET requests of a specific manufacture, the response has following structure:
+
 ```
 {
   "href": "/api/manufacturers/1/",
@@ -64,8 +78,10 @@ For GET requests of a specific manufacture, the response has following structure
 ```
 
 ### Vehicle Model Endpoints
+
 ![Vehicle Model Endpoints](ModelVehicle.png)
 For POST requests, can post the following JSON formatted body into Insomnia JSON window:
+
 ```
 {
   "name": "Sebring",
@@ -73,7 +89,9 @@ For POST requests, can post the following JSON formatted body into Insomnia JSON
   "manufacturer_id": 1
 }
 ```
+
 For GET requests of entire list of vehicle models, response will have following structure:
+
 ```
 {
   "models": [
@@ -91,7 +109,9 @@ For GET requests of entire list of vehicle models, response will have following 
   ]
 }
 ```
+
 For GET requests of specific vehicle models, response will have following structure:
+
 ```
 {
   "href": "/api/models/1/",
@@ -107,8 +127,10 @@ For GET requests of specific vehicle models, response will have following struct
 ```
 
 ### Automobile Endpoints
+
 ![Automobile Endpoints](AutomobileEndpoints.png)
 For POST requests, can post the following JSON formatted body into Insomnia JSON window:
+
 ```
 {
   "color": "red",
@@ -117,7 +139,9 @@ For POST requests, can post the following JSON formatted body into Insomnia JSON
   "model_id": 1
 }
 ```
+
 For GET requests of entire list of automobiles in inventory, response will have following structure:
+
 ```
 {
   "autos": [
@@ -143,7 +167,9 @@ For GET requests of entire list of automobiles in inventory, response will have 
   ]
 }
 ```
+
 For GET requests of a specific automobile, response will have following structure:
+
 ```
 {
   "href": "/api/automobiles/1C3CC5FB2AN120174/",
@@ -166,23 +192,19 @@ For GET requests of a specific automobile, response will have following structur
 }
 ```
 
-
-
-
-
 ## Service microservice
 
 Introducing the service microservice!
 
 ###Service Appointments:
 
-| Description                          | Method | URL                                                           |
-| ------------------------------------ | ------ | ------------------------------------------------------------- |
-| List service appointments            | GET    | http://localhost:8080/api/serviceappointment/                 |
-| Create service appointment           | POST   | http://localhost:8080/api/serviceappointment/                 |
-| Delete service appointment           | DELETE | http://localhost:8080/api/serviceappointment/<int:id>         |
-| Set appointment status to 'canceled' | PUT    | http://localhost:8080/api/serviceappointment/<int:id>/cancel/ |
-| Set appointment status to 'finished' | PUT    | http://localhost:8080/api/serviceappointment/<int:id>/finish/ |
+| Description                          | Method | URL                                                     |
+| ------------------------------------ | ------ | ------------------------------------------------------- |
+| List service appointments            | GET    | http://localhost:8080/api/appointments/                 |
+| Create service appointment           | POST   | http://localhost:8080/api/appointments/                 |
+| Delete service appointment           | DELETE | http://localhost:8080/api/appointments/<int:id>         |
+| Set appointment status to 'canceled' | PUT    | http://localhost:8080/api/appointments/<int:id>/cancel/ |
+| Set appointment status to 'finished' | PUT    | http://localhost:8080/api/appointments/<int:id>/finish/ |
 
 ##### Create Service Appointments:
 
@@ -268,7 +290,9 @@ Introducing the technicians!
 | Delete a specific technician | DELETE | http://localhost:8080/api/technicians/:id |
 
 ##### Creating a technician:
+
 To create a technician you'd need to use a `POST` request to `http://localhost:8080/api/technicians/` in the following format:
+
 ```
 {
   "first_name": "Ivan",
@@ -278,7 +302,9 @@ To create a technician you'd need to use a `POST` request to `http://localhost:8
 ```
 
 ##### Getting a list of technicians:
+
 To get a list of technicians you'd need to use a `GET` request to `http://localhost:8080/api/technicians/` and it'll show in the following format:
+
 ```
 {
 	"technicians": [
@@ -293,7 +319,9 @@ To get a list of technicians you'd need to use a `GET` request to `http://localh
 ```
 
 ##### Deleting a technician:
+
 To remove a technician you'd need to use a `DELETE` request to `http://localhost:8080/api/technicians/:id` and it'll show in the following format:
+
 ```
 {
 	"deleted": true
@@ -301,20 +329,24 @@ To remove a technician you'd need to use a `DELETE` request to `http://localhost
 ```
 
 ## Models:
+
 The service model has 3 models:
 
 ##### Technician:
+
 - first_name
 - last_name
 - employee_id
 
 ##### AutomobileVO:
+
 - vin
 - year
 - color
 - sold
 
 ##### Appointment:
+
 - vin
 - customer
 - date_time
@@ -337,14 +369,16 @@ Because the status of an unsold automobile is `false` there is a dependence need
 Poller then automatically updates the database of available automobiles, for which create sale record can utilize to ensure an already sold car, is not available to be sold again.
 
 ### Automobile Poller
+
 First must complete the poller.py file to allow communication between the automobileVO model and the Sales model. Only update the code indicated by comments in `sales/poll/poller.py`. Do not alter code anywhere else. Poller should pass tests and should be executed from Docker Sales poller container using `python test_poller.py`.
 
-
 ### Salespeople RESTful API Endpoints
+
 Must create the following RESTful APIs endpoints via backend view functions:
 ![Salespeople Endpoints](salespeople.png)
 
 #### **Add a salesperson**
+
 Must create a form that allows user to enter the first and last name, as well as an employee ID.
 When form submitted, salesperson created in the applications database and rendered onto the salesperson list.
 Then must create a link in the navbar in `Nav.js` to connect the element to the corresponding JS file.
@@ -352,15 +386,18 @@ Then must create a link in the navbar in `Nav.js` to connect the element to the 
 ![Add Salesperson](AddSalesperson.png)
 
 #### **List all salespeople**
+
 Must create a form that allows user to view the entire list of all registered salespeople in the database.
 
 ![List Salespeople](ListofSalespeople.png)
 
 ### Customer RESTful API Endpoints
+
 Must create the following RESTful APIs endpoints via backend view functions:
 ![Customer Endpoints](customers.png)
 
 #### **Add a customer**
+
 Must create a form that allows user to enter the first and last name, address, and phone number.
 When form submitted, customer is created in the applications database and rendered onto customers list.
 Then must create a link in the navbar in `Nav.js` to connect the element to the corresponding JS file.
@@ -368,15 +405,18 @@ Then must create a link in the navbar in `Nav.js` to connect the element to the 
 ![Add Customer](AddCustomer.png)
 
 #### **List all customers**
+
 Must create a form that allows user to view the entire list of all registered customers in the database.
 
 ![List Customers](ListCustomers.png)
 
 ### Sale RESTful API Endpoints
+
 Must create the following RESTful APIs endpoints via backend view functions:
 ![Sales Endpoints](salesrecord.png)
 
 #### **Record a new sale**
+
 Must create a form that allows user to select an available automobile using VIN as its identifying property from the inventory database utilizing poller refreshing the inventories database.
 Then must select a salesperson and customer from database.
 Then input the price for that automobile sale.
@@ -384,21 +424,25 @@ Then input the price for that automobile sale.
 ![Create Sale](CreateSale.png)
 
 #### **List all sales**
+
 Must create a form that allows user to view entire list of all completed sales in the database.
 
 ![List Sales](ListSales.png)
 
 #### **Salesperson History**
+
 You must show a list of sales by a specific salesperson. Done by creating a page with a dropdown populated with existing salespeople. When dropdown selection of salespeople changes, the list of sales changes to show all sales associated with the selected salesperson. List of sales contains salesperson, the customer, the automobile VIN, and the price of the sale.
 Then must create a link in the navbar in `Nav.js` to connect the element to the corresponding JS file.
 
 ![List Salesperson History](ListSalespersonsHistory.png)
 
-
 ### Notes
+
 - Each endpoint should return a `400` or `404` error if unsuccessful or attempting to access a model object that does not exist.
 - **Your API should be able to pass the included tests.** Can find API tests within `sales/api/tests` folder.
-Can run the API tests from Docker Sales API container using `python manage.py test.`
+  Can run the API tests from Docker Sales API container using `python manage.py test.`
+
 ## Authors
+
 - [@James Lee](https://gitlab.com/eeHyunwoo)
 - [@Ivan Tsang](https://gitlab.com/ivntsng)
