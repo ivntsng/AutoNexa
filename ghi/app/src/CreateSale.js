@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-export default function CreateSale({getSale}) {
+export default function CreateSale({getSales, getCustomer}) {
   const [automobile, setAutomobile] = useState('');
   const [automobiles, setAutomobiles] = useState([]);
 
@@ -8,7 +8,7 @@ export default function CreateSale({getSale}) {
   const [salespersons, setSalespersons] = useState([]);
 
   const [customer, setCustomer] = useState('');
-  const [customers, setCustomers] = useState('');
+  const [customers, setCustomers] = useState([]);
 
   const [price, setPrice] = useState('');
 
@@ -55,7 +55,7 @@ export default function CreateSale({getSale}) {
       const url = "http://localhost:8090/api/customers/";
       const response = await fetch(url);
       if (response.ok) {
-        const data = await fetch(url);
+        const data = await response.json();
         setCustomers(data.customers)
       }
     }
@@ -71,6 +71,7 @@ export default function CreateSale({getSale}) {
     data.automobile = automobile;
     data.salesperson = salesperson;
     data.customer = customer;
+    data.price = price;
 
     const url = "http://localhost:8090/api/sales/";
     const fetchConfig = {
@@ -92,6 +93,87 @@ export default function CreateSale({getSale}) {
   };
 
   return (
-    <p>I CANT DO THIS JSX!!!!</p>
+    <div className="justify-content-center align-items-center">
+      <div className="shadow p-4 mt-4">
+        <h1>Create Sale</h1>
+        <form onSubmit={handleSubmit}>
+          <div>
+            <label>Automobile VIN</label>
+          </div>
+          <div className="form-floating mb-3">
+            <select
+            onChange={handleAutomobileChange}
+            value={automobile}
+            className="form-select"
+            aria-label="Default select example"
+            >
+              <option>Choose an automobile VIN...</option>
+              {automobiles.map((automobile) => {
+                return (
+                  <option key={automobile.id} value={automobile.vin}>
+                    {automobile.vin}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          <div>
+            <label>Salesperson</label>
+          </div>
+          <div className="form-floating mb-3">
+            <select
+            onChange={handleSalespersonChange}
+            value={salesperson}
+            className="form-select"
+            aria-label="Default select example"
+            >
+              <option>Choose a salesperson...</option>
+              {salespersons.map((salesperson) => {
+                return (
+                  <option key={salesperson.id} value={salesperson.employee_id}>
+                    {salesperson.first_name}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          <div>
+            <label>Customer</label>
+          </div>
+          <div className="form-floating mb-3">
+            <select
+            onChange={handleCustomerChange}
+            value={customer}
+            className="form-select"
+            aria-label="Default select example"
+            >
+              <option>Choose a customer...</option>
+              {customers.map((customer) => {
+                return (
+                  <option key={customer.id} value={customer.first_name}>
+                    {customer.first_name}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          <div className="form-floating mb-3">
+              <input
+                onChange={handlePriceChange}
+                value={price}
+                placeholder="Price"
+                required
+                type="text"
+                name="price"
+                id="price"
+              />
+
+            </div>
+            <button className="btn btn-primary" type="submit">
+              Create
+            </button>
+        </form>
+      </div>
+    </div>
   )
 }
