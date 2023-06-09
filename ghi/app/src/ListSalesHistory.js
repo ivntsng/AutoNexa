@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
 
 export default function SalesHistory({ getSales }) {
   const [salesperson, setSalesperson] = useState("");
@@ -11,20 +11,20 @@ export default function SalesHistory({ getSales }) {
   };
 
   useEffect(() => {
-    async function ListSalespeople(){
-      const url = "http://localhost:8090/api/salespeople/"
-      const response = await fetch(url)
+    async function ListSalespeople() {
+      const url = "http://localhost:8090/api/salespeople/";
+      const response = await fetch(url);
       if (response.ok) {
         const data = await response.json()
         setSalespersons(data.salespeople)
       }
     }
-    async function ListSales(){
-      const url = "http://localhost:8090/api/sales/"
-      const response = await fetch(url)
+    async function ListSales() {
+      const url = "http://localhost:8090/api/sales/";
+      const response = await fetch(url);
       if (response.ok) {
-        const data = await response.json()
-        setSales(data.sales)
+        const data = await response.json();
+        setSales(data.sales);
       }
     }
 
