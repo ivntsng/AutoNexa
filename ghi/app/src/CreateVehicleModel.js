@@ -1,91 +1,97 @@
-import { useState, useEffect } from "react";
-import React from "react";
-function CreateVehicleModel() {
-  const [name, setName] = useState("");
-  const [picture, setPicture] = useState("");
-  const [manufacturer, setManufacturer] = useState("");
-  const [manufacturers, setManufacturers] = useState([]);
+import { useEffect, useState } from 'react';
+
+export default function CreateNewModel({getModels}){
+  const [name, setName] = useState('')
+  const [picture, setPicture] = useState('')
+  const [manufacturer, setManufacturer] = useState('')
+  const [manufacturers, setManufacturers] = useState([])
 
   const handleNameChange = (event) => {
     const value = event.target.value;
-    setName(value);
-  };
+    setName(value)
+  }
 
   const handlePictureChange = (event) => {
     const value = event.target.value;
-    setPicture(value);
-  };
+    setPicture(value)
+  }
 
   const handleManufacturerChange = (event) => {
-    const value = event.target.value;
-    setManufacturer(value);
-  };
+    const value = event.target.value
+    setManufacturer(value)
+  }
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    async function CreateModel(){
+      const url = "http://localhost:8100/api/manufacturers/"
+      const response = await fetch(url)
+      if (response.ok) {
+        const data = await response.json()
+        setManufacturers(data.manufacturers)
+      }
+    }
+    CreateModel();
+  }, [])
 
-    const data = {};
-    data.name = name;
-    data.picture_url = picture;
-    data.manufacturer_id = manufacturer;
+  const handleSubmit = async(event) => {
+    event.preventDefault()
+    const data = {}
+    data.name = name
+    data.picture_url = picture
+    data.manufacturer_id = manufacturer
 
-    const json = JSON.stringify(data);
-    const url = "http://localhost:8100/api/models/";
+    const url = "http://localhost:8100/api/models/"
     const fetchConfig = {
       method: "post",
-      body: json,
+      body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
-      },
-    };
-    const response = await fetch(url, fetchConfig);
-    if (response.ok) {
-      const newVehicle = await response.json();
-      setName("");
-      setPicture("");
-      setManufacturer("");
+      }
     }
-  };
-  const fetchData = async () => {
-    const url = "http://localhost:8100/api/manufacturers/";
-    const response = await fetch(url);
 
+    const response = await fetch(url, fetchConfig)
     if (response.ok) {
-      const data = await response.json();
-      setManufacturers(data.manufacturers);
-    } else {
-      console.error(response);
+      const newModel = await response.json()
+      setName("")
+      setPicture("")
+      setManufacturer("")
+      getModels()
     }
-  };
-  useEffect(() => {
-    fetchData();
-  }, []);
+  }
+
+
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Create a vehicle model</h1>
-      <div className="form-floating mb-3">
-        <input
-          onChange={handleNameChange}
-          type="text"
-          value={name}
-          className="form-control"
-          id="floatingInput"
-          placeholder=""
-        />
-        <label>Model name...</label>
-      </div>
-      <div className="form-floating mb-3">
-        <input
-          onChange={handlePictureChange}
-          type="text"
-          value={picture}
-          className="form-control"
-          id="floatingPassword"
-          placeholder="Password"
-        />
-        <label>Picture URL...</label>
-      </div>
-      <select
+    <div className="row">
+      <div className="offset-3 col-6">
+        <div className="shadow p-4 mt-4">
+          <h1>Add a Model</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="form-floating mb-3">
+              <input
+                onChange={handleNameChange}
+                value={name}
+                placeholder="First name..."
+                required
+                type="text"
+                name="name"
+                id="name"
+              />
+
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                onChange={handlePictureChange}
+                value={picture}
+                placeholder="Picture url..."
+                required
+                type="text"
+                name="picture"
+                id="picture"
+              />
+
+            </div>
+            <div className="form-floating mb-3">
+            <select
         onChange={handleManufacturerChange}
         value={manufacturer}
         className="form-select"
@@ -100,9 +106,13 @@ function CreateVehicleModel() {
           );
         })}
       </select>
-      <button className="btn btn-primary">Create</button>
-    </form>
-  );
+            </div>
+            <button className="btn btn-primary" type="submit">
+              Create
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  )
 }
-
-export default CreateVehicleModel;

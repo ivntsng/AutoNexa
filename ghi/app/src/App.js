@@ -92,6 +92,7 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setSales(data.sales);
+      console.log(data);
     }
   }
 
@@ -112,6 +113,7 @@ function App() {
     getSalesPeople();
     getAppointment();
     getCustomer();
+    getSales();
   }, []);
 
   return (
