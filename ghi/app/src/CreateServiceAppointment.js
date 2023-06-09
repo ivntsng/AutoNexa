@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 export default function CreateServiceAppointment({ getAppointment }) {
   const [vin, setVin] = useState("");
   const [customer, setCustomer] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
+  const [date_time, setDateTime] = useState("");
   const [reason, setReason] = useState("");
   const [technician, setTechnician] = useState("");
   const [technicians, setTechnicians] = useState([]);
@@ -19,14 +18,9 @@ export default function CreateServiceAppointment({ getAppointment }) {
     setCustomer(value);
   };
 
-  const handleDateChange = (e) => {
+  const handleDateTimeChange = (e) => {
     const value = e.target.value;
-    setDate(value);
-  };
-
-  const handleTimeChange = (e) => {
-    const value = e.target.value;
-    setTime(value);
+    setDateTime(value);
   };
 
   const handleReasonChange = (e) => {
@@ -56,8 +50,7 @@ export default function CreateServiceAppointment({ getAppointment }) {
     const data = {};
     data.vin = vin;
     data.customer = customer;
-    data.date = date;
-    data.time = time;
+    data.date_time = date_time;
     data.reason = reason;
     data.technician_id = technician;
 
@@ -75,8 +68,7 @@ export default function CreateServiceAppointment({ getAppointment }) {
       const newApt = await response.json();
       setVin("");
       setCustomer("");
-      setDate("");
-      setTime("");
+      setDateTime("");
       setReason("");
       setTechnician("");
       getAppointment();
@@ -117,29 +109,16 @@ export default function CreateServiceAppointment({ getAppointment }) {
             </div>
             <div className="form-floating mb-3">
               <input
-                onChange={handleDateChange}
-                value={date}
+                onChange={handleDateTimeChange}
+                value={date_time}
                 placeholder="date"
                 required
-                type="date"
+                type="datetime-local"
                 name="date"
                 id="date"
                 className="form-control"
               />
               <label htmlFor="date">Date</label>
-            </div>
-            <div className="form-floating mb-3 clickable-input">
-              <input
-                onChange={handleTimeChange}
-                value={time}
-                placeholder="time"
-                required
-                type="time"
-                name="time"
-                id="time"
-                className="form-control"
-              />
-              <label htmlFor="time">Time</label>
             </div>
             <div className="form-floating mb-3 clickable-input">
               <input

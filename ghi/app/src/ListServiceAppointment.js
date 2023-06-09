@@ -41,6 +41,22 @@ export default function AppointmentsList({
   // useEffect(() => {
   //   getAutomobiles();
   // }, []);
+  const formatDate = (dateTimeString) => {
+    const dateTime = new Date(dateTimeString);
+    const month = dateTime.getMonth() + 1;
+    const day = dateTime.getDate();
+    const year = dateTime.getFullYear();
+    let hours = dateTime.getHours();
+    const minutes = dateTime.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    hours = hours % 12 || 12;
+
+    const timeString = `${month}/${day}/${year}, ${hours}:${
+      minutes < 10 ? "0" + minutes : minutes
+    } ${ampm}`;
+    return timeString;
+  };
 
   return (
     <div>
@@ -51,15 +67,13 @@ export default function AppointmentsList({
             <th>VIN</th>
             <th>Is VIP?</th>
             <th>Customer</th>
-            <th>Date</th>
-            <th>Time</th>
+            <th>Date & Time</th>
             <th>Technician</th>
             <th>Reason</th>
           </tr>
         </thead>
         <tbody>
           {appointmentsList.map((appointment) => {
-            // automobileList.filter(() => )
             if (appointment.status === "") {
               const curAutomobile = automobileList.filter(
                 (a) => a.vin === appointment.vin
@@ -69,8 +83,7 @@ export default function AppointmentsList({
                   <td>{appointment.vin}</td>
                   <td>{curAutomobile && curAutomobile.sold ? "Yes" : "No"}</td>
                   <td>{appointment.customer}</td>
-                  <td>{appointment.date}</td>
-                  <td>{appointment.time}</td>
+                  <td>{formatDate(appointment.date_time)}</td>
                   <td>{appointment.technician.first_name}</td>
                   <td>{appointment.reason}</td>
                   <td>

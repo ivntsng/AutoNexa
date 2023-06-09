@@ -233,7 +233,10 @@ function App() {
             <Route
               path="create"
               element={
-                <CreateServiceAppointment getAppointment={getAppointment} />
+                <CreateServiceAppointment
+                  getAppointment={getAppointment}
+                  getAutomobiles={getAutomobiles}
+                />
               }
             />
             <Route
