@@ -19,7 +19,7 @@ export default function ModelList({ modelList, getModels }) {
                 <td>{model.name}</td>
                 <td>{model.manufacturer.name}</td>
                 <td>
-                  <img src={model.picture_url} width="250" height="250"></img>
+                  <img src={model.picture_url} width="300" height="200"></img>
                 </td>
               </tr>
             );

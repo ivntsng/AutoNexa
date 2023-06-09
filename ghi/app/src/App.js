@@ -92,7 +92,6 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       setSales(data.sales);
-      console.log(data);
     }
   }
 
@@ -228,13 +227,18 @@ function App() {
                 <ListServiceAppointment
                   appointmentsList={appointment}
                   getAppointment={getAppointment}
+                  automobileList={automobile}
+                  getAutomobiles={getAutomobiles}
                 />
               }
             />
             <Route
               path="create"
               element={
-                <CreateServiceAppointment getAppointment={getAppointment} />
+                <CreateServiceAppointment
+                  getAppointment={getAppointment}
+                  getAutomobiles={getAutomobiles}
+                />
               }
             />
             <Route
@@ -243,6 +247,8 @@ function App() {
                 <ListServiceHistory
                   serviceList={appointment}
                   getAppointment={getAppointment}
+                  automobileList={automobile}
+                  getAutomobiles={getAutomobiles}
                 />
               }
             />

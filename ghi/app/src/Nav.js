@@ -144,7 +144,7 @@ function Nav() {
               <ul className="dropdown-menu" aria-labelledby="ServiceMenuButton">
                 <li>
                   <Link className="dropdown-item" to="/appointments">
-                    Service Appointments
+                    List Service Appointments
                   </Link>
                 </li>
                 <li>

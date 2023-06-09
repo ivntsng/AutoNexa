@@ -1,16 +1,16 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
 
 export default function CreateSale({getSales, getCustomer}) {
   const [automobile, setAutomobile] = useState('');
   const [automobiles, setAutomobiles] = useState([]);
 
-  const [salesperson, setSalesperson] = useState('');
+  const [salesperson, setSalesperson] = useState("");
   const [salespersons, setSalespersons] = useState([]);
 
   const [customer, setCustomer] = useState('');
   const [customers, setCustomers] = useState([]);
 
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState("");
 
   const handleAutomobileChange = (event) => {
     const value = event.target.value;
@@ -30,15 +30,15 @@ export default function CreateSale({getSales, getCustomer}) {
   const handlePriceChange = (event) => {
     const value = event.target.value;
     setPrice(value);
-  }
+  };
 
-  useEffect( () => {
+  useEffect(() => {
     async function ListAutomobiles() {
       const url = "http://localhost:8100/api/automobiles/";
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        const availableAutomobiles = data.autos.filter(auto => !auto.sold);
+        const availableAutomobiles = data.autos.filter((auto) => !auto.sold);
         setAutomobiles(availableAutomobiles);
       }
     }
@@ -65,7 +65,7 @@ export default function CreateSale({getSales, getCustomer}) {
     ListCustomers();
   }, []);
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = {};
     data.automobile = automobile;

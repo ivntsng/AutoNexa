@@ -30,8 +30,7 @@ class AppointmentDetailEncoder(ModelEncoder):
     properties = [
         'vin',
         'customer',
-        'date',
-        'time',
+        'date_time',
         'reason',
         'status',
         'vip',
@@ -44,18 +43,6 @@ class AppointmentDetailEncoder(ModelEncoder):
         'automobile': AutomobileVODetailedEncoder(),
         'technician': TechnicianDetailEncoder(),
     }
-
-    def get_extra_data(self, o):
-        if isinstance(o.date, str) and isinstance(o.time, str):
-            return {
-                'date': o.date,
-                'time': o.time,
-            }
-        else:
-            return {
-                'date': o.date.isoformat(),
-                'time': o.time.isoformat(),
-            }
 
 @require_http_methods(['GET', 'POST'])
 def api_list_technician(request):
@@ -169,7 +156,7 @@ def api_show_appointments(request, pk):
         try:
             content = json.loads(request.body)
             appointmnet = Appointment.objects.get(id=pk)
-            props = ['reason', 'date', 'technician_id', 'time']
+            props = ['reason', 'date_time', 'technician_id']
             for prop in props:
                 if prop in content:
                     setattr(appointment, prop, content[prop])
